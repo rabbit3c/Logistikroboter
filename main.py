@@ -1,16 +1,19 @@
-from line_sensor import *
-from serial_communication import*
+from navigate import *
+from path import Path
+import robot
 
 def main():
     print("Starting...")
 
-    communication_test()
+    robot.init()
 
-    set_speed(200)
+    path = Path(3, 6)
+    print(path)
 
     print("Ready!")
+    
     while True:
-        update_state()
+        update_state(path)
 
 if __name__ == "__main__":
     main()
