@@ -36,7 +36,7 @@ def update_state(path):
             robot.forward()
 
 
-def check_if_changed(i): #index in states
+def check_if_changed(i): # i -> index in states
     states = ["intersection", "line_left", "line_right", "normal"]
     global state
 

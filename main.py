@@ -2,6 +2,7 @@ from navigate import *
 from path import Path
 import robot
 
+
 def main():
     print("Starting...")
 
@@ -14,6 +15,7 @@ def main():
     
     while True:
         update_state(path)
+
 
 if __name__ == "__main__":
     main()

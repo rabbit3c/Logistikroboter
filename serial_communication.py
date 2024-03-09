@@ -17,10 +17,12 @@ def communication_test():
     print("Retrying...")
     communication_test()
 
+
 def send_command(command):
     print(f"Sending command: \"{command}\"")
     arduino.write(f"{command}\n".encode())
     return confirmation()
+
 
 def set_speed(speed):
     print("Setting speed...")
@@ -31,6 +33,7 @@ def set_speed(speed):
     if not confirmation():
         communication_test()
         set_speed(speed)
+
 
 def confirmation():
     answer = arduino.readline().decode('utf-8').rstrip()

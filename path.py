@@ -15,7 +15,7 @@ class Path():
         return f"Path from {self.point_a} to {self.point_b}: {self.path}"
     
     def calculate(self):
-        self.path = [self.right, self.left]
+        self.path = [self.right, self.left] #fester Wert
 
     def next(self):
         if len(self.path) == 0: 
