@@ -4,7 +4,7 @@ from line_sensor import *
 
 def init():
     communication_test()
-    set_speed(100)
+    set_speed(90)
 
 
 def stop():

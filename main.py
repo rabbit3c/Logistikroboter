@@ -13,8 +13,8 @@ def main():
 
     print("Ready!")
     
-    while True:
-        update_state(path)
+    while not path.finished:
+        navigate(path)
 
 
 if __name__ == "__main__":

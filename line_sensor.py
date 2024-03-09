@@ -1,5 +1,4 @@
 from gpiozero import InputDevice
-from serial_communication import *
 
 
 sensor_left = InputDevice(14)
