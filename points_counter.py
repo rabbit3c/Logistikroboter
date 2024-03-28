@@ -1,11 +1,12 @@
 from gpiozero import InputDevice
+from path import Path
 
 
 count_sensor = InputDevice(17)
 points = 0
 state = True
 
-def check_sensor(path):
+def check_sensor(path: Path):
     if not path.track_points:
         return
 

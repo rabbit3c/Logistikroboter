@@ -1,5 +1,6 @@
 from line_sensor import *
 from serial_communication import *
+from path import Path
 import robot
 import points_counter
 
@@ -30,7 +31,7 @@ def navigate(path):
             robot.forward()
 
 
-def navigate_intersection(path):
+def navigate_intersection(path: Path):
     robot.stop()
 
     direction = path.next()

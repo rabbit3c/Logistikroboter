@@ -1,5 +1,5 @@
 from navigate import *
-from path import Path
+import a_star
 import robot
 
 
@@ -7,8 +7,9 @@ def main():
     print("Starting...")
 
     robot.init()
+    print()
 
-    path = Path(3, 6)
+    path = a_star.search((0, 1), (6, 5))
     print(path)
 
     print("Ready!")
