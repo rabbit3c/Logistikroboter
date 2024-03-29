@@ -29,7 +29,7 @@ def left():
 
 def turn_right():
     forward()
-    sleep(0.2)
+    sleep(0.25)
     stop()
     send_command("turn_right")
     sleep(2)
@@ -41,7 +41,7 @@ def turn_right():
 
 def turn_left():
     forward()
-    sleep(0.2)
+    sleep(0.25)
     stop()
     send_command("turn_left")
     sleep(2)
