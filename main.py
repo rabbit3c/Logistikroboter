@@ -9,7 +9,7 @@ def main():
     robot.init()
     print()
 
-    path = a_star.search((0, 1), (6, 5))
+    path = a_star.search((1, 2), (7, 5))
     print(path)
 
     print("Ready!")
