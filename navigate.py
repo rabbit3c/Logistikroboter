@@ -7,11 +7,7 @@ import points_counter
 def navigate(path):
     left = line_left()
     right = line_right()
-    finished = points_counter.check_sensor(path)
-
-    if finished:
-        send_command("stop")
-        return
+    finished = False
 
     if left and right:
         if check_if_changed(0):
@@ -26,9 +22,14 @@ def navigate(path):
             print("Line detected on the right")
             robot.right()
     else:
+        finished = points_counter.check_sensor(path)
         if check_if_changed(3):
             send_command("forward")
             robot.forward()
+
+    if finished:
+        send_command("stop")
+        return
 
 
 def navigate_intersection(path: Path):
