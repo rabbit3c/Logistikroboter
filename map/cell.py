@@ -2,6 +2,7 @@ class Cell:
     start = False
     target = False
     lane = False
+    blocked = False
     path = False
     intersection = False
 
@@ -24,6 +25,9 @@ class Cell:
     def set_path(self):
         self.path = True
 
+    def set_blocked(self):
+        self.lane = False
+        self.blocked = True
 
     def set_intersection(self):
         self.intersection = True
@@ -38,6 +42,8 @@ class Cell:
             return "🟦"
         if self.lane:
             return "⬜️"
+        if self.blocked:
+            return "⬛️"
         return "🟫"
     
 
