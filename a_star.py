@@ -77,13 +77,17 @@ def smallest_f(list: list, map: Map) -> tuple[int, int]: # find cell with smalle
 
     for node in list:
         f = map.cell(node).f()
-        if f < best_f:
-            best_node = node
-            best_f = f
+        if f > best_f:
+            continue
+        if f == best_f:
+            if node[0] == 6 or node[1] == 4: #try to avoid the middle
+                continue
+        best_node = node
+        best_f = f
     
     return best_node
         
 
 if __name__ == "__main__":
-    path = search((0, 1), (0, 5))
+    path = search((8, 2), (1, 5))
     print(path)
