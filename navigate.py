@@ -14,15 +14,17 @@ def navigate(path):
             print("Intersection detected")
             navigate_intersection(path)
     elif left:
+        finished = points_counter.check_sensor(path, True)
         if check_if_changed(1):
             print("Line detected on the left")
             robot.left()
     elif right:
+        finished = points_counter.check_sensor(path, True)
         if check_if_changed(2):
             print("Line detected on the right")
             robot.right()
     else:
-        finished = points_counter.check_sensor(path)
+        finished = points_counter.check_sensor(path, False)
         if check_if_changed(3):
             send_command("forward")
             robot.forward()
