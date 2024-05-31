@@ -9,7 +9,8 @@ def main():
     robot.init()
     print()
 
-    path = a_star.search((1, 2), (7, 5))
+    # path = a_star.search((2, 8), (10, 2))
+    path = a_star.search((11, 7), (8, 2))
     print(path)
 
     print("Ready!")
