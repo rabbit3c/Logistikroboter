@@ -28,9 +28,6 @@ def left():
 
 
 def turn_right():
-    #forward()
-    #sleep(0.05)
-    #stop()
     send_command("turn_right")
     sleep(1)
     while not line_right(): #wait until reaching the line
@@ -40,9 +37,6 @@ def turn_right():
 
 
 def turn_left():
-    #forward()
-    #sleep(0.05)
-    #stop()
     send_command("turn_left")
     sleep(1)
     while not line_left(): #wait until reaching the line

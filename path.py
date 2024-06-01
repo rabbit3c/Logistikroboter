@@ -25,7 +25,7 @@ class Path():
         return f"Path from {self.start} to {self.target}: {path_string} and then counting {self.distance_to_target} points"
     
     
-    def calculate(self, map: Map, nodes):
+    def calculate(self, map: Map, nodes): #translate Path from A* Search Algorithm in directions for the robot to take
         directions = [
             [self.forward, self.forward, self.left, self.right],
             [self.forward, self.forward, self.right, self.left],

@@ -11,7 +11,7 @@ def main():
 
     # path = a_star.search((2, 8), (9, 2))
     # path = a_star.search((11, 7), (8, 2))
-    path = a_star.search((8, 2), (1, 5), (0, 1))
+    path = a_star.search((7, 5), (11, 6), (-1, 0))
 
     print(path)
 
