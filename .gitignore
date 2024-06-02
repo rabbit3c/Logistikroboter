@@ -1,6 +1,7 @@
-venv
 .lgd-nfy0
 __pycache__
 
 pictures/*
 !pictures/
+
+!pictures/test_barcode.jpg

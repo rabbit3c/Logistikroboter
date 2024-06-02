@@ -1,5 +1,5 @@
 from picamera2 import Picamera2, Preview
-from libcamera import Transform, controls
+from libcamera import Transform
 import time
 
 
