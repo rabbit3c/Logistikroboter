@@ -4,8 +4,9 @@ import time
 
 
 def scan():
-    print("Scanning for barcode...")
+    print("\033[33mScanning for barcode...\033[0m")
     camera.init()
+    print("\033[33mTaking pictures...\033[0m\n")
     result = ""
 
     # take pictures and try to read a barcode until barcode is found

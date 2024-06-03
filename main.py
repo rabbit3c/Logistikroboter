@@ -5,26 +5,24 @@ import scanner
 
 
 def main():
-    print("Starting...")
+    print("\033[32mStarting...\033[0m\n")
 
     robot.init()
 
-    print()
-
     start_point = input_tuple("Enter start point x, y: ")
     direction = input_tuple("Enter robot direction x, y: ")
+    print()
 
     end_point = scanner.scan()
 
     path = a_star.search(start_point, end_point, direction)
 
-    print(path)
+    print(str(path) + "\n")
 
-    print("Ready!")
+    print("\033[32mReady!\033[0m\n")
     robot.forward()
-    
+
     while not path.finished:
-        
         navigate(path)
 
 

@@ -76,5 +76,5 @@ class Path():
     
     def check_path_done(self):
         if len(self.path) == 0: # if there are no more elements in the list, start to track points
-            print("Tracking points...")
+            print("\nTracking points...")
             self.track_points = True

@@ -26,6 +26,6 @@ def check_sensor(path: Path, backwards):
 
     if points == path.distance_to_target:
         path.finished = True
-        print("Arrived at destination!")
+        print("\n\033[32mArrived at destination!\033[32m")
 
     return points == path.distance_to_target

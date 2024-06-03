@@ -4,7 +4,7 @@ from path import Path
 
 
 def search(start, target, direction) -> Path: # A* Search Algorithm
-    print("Starting Search Algorithm...")
+    print("\033[33mStarting Search Algorithm...\033[0m")
 
     map = Map()
 
@@ -60,7 +60,7 @@ def search(start, target, direction) -> Path: # A* Search Algorithm
 
     
 def trace_path(map: Map, start_node, target_node) -> Path: # draw path on map and calculate instructions for robot
-    print("Path calculated!")
+    print("\033[32mPath calculated!\033[0m")
     
     nodes = map.draw_path(start_node, target_node)
     print(map)

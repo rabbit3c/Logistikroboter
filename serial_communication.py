@@ -13,23 +13,23 @@ def communication_test():
     sleep(0.1)
 
     if confirmation():
-        print("Arduino is available and ready to receive commands")
+        print("\033[32mArduino is available and ready to receive commands\033[0m\n")
         return True
     
-    print("Arduino not reachable")
+    print("\033[31mArduino not reachable\033[0m")
     sleep(1)
     print("Retrying...")
     communication_test()
 
 
 def send_command(command):
-    print(f"Sending command: \"{command}\"")
+    # print(f"Sending command: \"{command}\"")
     arduino.write(f"{command}\n".encode())
     return confirmation()
 
 
 def set_speed(speed):
-    print("Setting speed...")
+    print("Setting speed...\n")
     arduino.reset_input_buffer()
     arduino.write(f"v{speed:03d}".encode())
     sleep(0.1)

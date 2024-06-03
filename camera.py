@@ -16,11 +16,12 @@ def init():
     camera.configure(camera_config)
     camera.start_preview(Preview.NULL) 
     camera.start()
-    time.sleep(2) 
+    time.sleep(2)
+    print("\33[32mCamera started\33[0m\n")
 
 
 def take_picture(filename="picture"):
-    print("Taking picture...")
+    # print("Taking picture...")
     camera.autofocus_cycle()
     camera.capture_file(f"pictures/{filename}.jpg")
 
