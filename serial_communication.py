@@ -6,12 +6,16 @@ arduino.reset_input_buffer()
 
 def communication_test():
     print("Testing communication...")
+
     arduino.reset_input_buffer()
+    arduino.write("_".encode())
     arduino.write("communication test".encode())
     sleep(0.1)
+
     if confirmation():
         print("Arduino is available and ready to receive commands")
         return True
+    
     print("Arduino not reachable")
     sleep(1)
     print("Retrying...")
