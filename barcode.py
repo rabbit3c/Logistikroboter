@@ -2,7 +2,7 @@ import cv2
 from pyzbar import pyzbar
 
 
-def scan(filename="picture.jpg"):
+def read(filename="picture.jpg"):
     print("Scanning image for barcodes...")
 
     image_path = f"pictures/{filename}"
@@ -17,8 +17,28 @@ def scan(filename="picture.jpg"):
 
     print("Barcodes:")
     for barcode in barcodes:
-        print(barcode.data.decode("utf-8"))
+        data = barcode.data.decode("utf-8")
+        print(data)
+
+        # if the data of the barcode has the right length return it to start navigation
+        if data is None:
+            continue
+        if len(data) == 6: 
+            return data
+        
+    return False
+        
+
+def decode(string):
+    y = int(string[:2]) # take first to characters
+    x = int(string[2:4]) # take two middle characters
+    h = int(string[4:]) # take last two characters
+
+    point = (x, y)
+
+    print(f"Destination: Point {point} at height {h}")
+    return point
 
 
 if __name__ == "__main__":
-    scan("test_barcode.jpg")
+    read()

@@ -19,7 +19,7 @@ class Map:
         self.calculate_intersections()
 
 
-    def load_json(self): #load map from json
+    def load_json(self): # load map from json
         file = open("/home/matthieu/Logistikroboter/map/map.json")
         return json.load(file)
     
@@ -58,7 +58,7 @@ class Map:
         self.cell(target).set_target()
 
 
-    def nearest_lane(self, point) -> tuple[int, int]: #find nearest path cell to a point
+    def nearest_lane(self, point) -> tuple[int, int]: # find nearest path cell to a point
         if self.cell(point).lane:
             return point
         

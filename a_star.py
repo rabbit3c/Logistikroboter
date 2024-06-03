@@ -3,7 +3,7 @@ from map.cell import Cell
 from path import Path
 
 
-def search(start, target, direction) -> Path: #A* Search Algorithm
+def search(start, target, direction) -> Path: # A* Search Algorithm
     print("Starting Search Algorithm...")
 
     map = Map()
@@ -82,7 +82,7 @@ def smallest_f(list: list, map: Map) -> tuple[int, int]: # find cell with smalle
         if f > best_f:
             continue
         if f == best_f:
-            if node[0] == 6 or node[1] == 4: #try to avoid the middle
+            if node[0] == 6 or node[1] == 4: # try to avoid the middle
                 continue
         best_node = node
         best_f = f

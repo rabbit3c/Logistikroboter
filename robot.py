@@ -30,17 +30,17 @@ def left():
 def turn_right():
     send_command("turn_right")
     sleep(1)
-    while not line_right(): #wait until reaching the line
+    while not line_right(): # wait until reaching the line
         pass
-    while line_right(): #wait until the line was crossed by the right sensor
+    while line_right(): # wait until the line was crossed by the right sensor
         pass
 
 
 def turn_left():
     send_command("turn_left")
     sleep(1)
-    while not line_left(): #wait until reaching the line
+    while not line_left(): # wait until reaching the line
         pass
-    while line_left(): #wait until the line was crossed by the right sensor
+    while line_left(): # wait until the line was crossed by the right sensor
         pass
 
