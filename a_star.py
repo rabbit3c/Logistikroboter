@@ -3,7 +3,7 @@ from map.cell import Cell
 from path import Path
 
 
-def search(start, target, direction) -> Path: # A* Search Algorithm
+def search(start, target, direction, direction_end=False) -> Path: # A* Search Algorithm
     print("\033[33mStarting Search Algorithm...\033[0m")
 
     map = Map()
@@ -20,6 +20,9 @@ def search(start, target, direction) -> Path: # A* Search Algorithm
     target_node = map.nearest_lane(target)
 
     map.cell((start_node[0] - direction[0], start_node[1] - direction[1])).set_blocked()
+    
+    if direction_end:
+        map.cell((target_node[0] + direction_end[0], target_node[1] - direction_end[1])).set_blocked()
 
     map.cell(start_node).g = 0 # distance of start_cell to start is 0
 
@@ -91,5 +94,5 @@ def smallest_f(list: list, map: Map) -> tuple[int, int]: # find cell with smalle
         
 
 if __name__ == "__main__":
-    path = search((8, 2), (1, 5), (1, 0))
+    path = search((8, 2), (2, 5), (1, 0), (1, 0))
     print(path)
