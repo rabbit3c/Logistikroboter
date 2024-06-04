@@ -2,6 +2,7 @@ import scanner
 import a_star
 import robot
 import time
+from serial_communication import set_speed
 from navigate import navigate
 
 
@@ -22,6 +23,7 @@ def navigate_path(path):
     print(str(path) + "\n")
 
     print("\033[32mReady!\033[0m\n")
+    set_speed(90)
     robot.forward()
 
     while not path.finished:

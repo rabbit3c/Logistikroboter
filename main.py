@@ -10,8 +10,10 @@ def main():
     robot.init()
     camera.init()
 
-    start_point = input_tuple("Enter start point x, y. \nRecommended start points are (1, 6), (1, 5), (1, 3), (1, 2): ")
-    direction = input_tuple("Enter robot direction x, y. \nRecommend direction is (0, -1): ")
+    # start_point = input_tuple("Enter start point x, y. \nRecommended start points are (1, 6), (1, 5), (1, 3), (1, 2): ")
+    start_point = (1, 2)
+    # direction = input_tuple("Enter robot direction x, y. \nRecommend direction is (0, -1): ")
+    direction = (0, -1)
     print()
 
     loop(start_point, direction)

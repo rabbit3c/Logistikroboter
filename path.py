@@ -1,4 +1,5 @@
 from map.map import Map
+from serial_communication import set_speed
 
 class Path():
     left = 0
@@ -81,3 +82,5 @@ class Path():
         if len(self.path) == 0: # if there are no more elements in the list, start to track points
             print("\nTracking points...")
             self.track_points = True
+            # set_speed(80)
+            

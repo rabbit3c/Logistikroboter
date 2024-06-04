@@ -41,18 +41,17 @@ def navigate_intersection(path: Path):
     match direction:
         case path.right:
             print("Turning right...\n")
-            robot.turn_right()
+            robot.turn_right(path)
         case path.left:
             print("Turning left...\n")
-            robot.turn_left()
+            robot.turn_left(path)
         case path.forward:
             print("Continuing straight...\n")
             robot.forward()
             sleep(0.5)
+            path.check_path_done()
         case _:
             robot.stop()
-
-    path.check_path_done()
 
 
 def check_if_changed(i): # i -> index in states
