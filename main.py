@@ -1,29 +1,20 @@
 from navigate import *
-import a_star
 import robot
-import scanner
+import camera
+from loop import loop
 
 
 def main():
     print("\033[32mStarting...\033[0m\n")
 
     robot.init()
+    camera.init()
 
-    start_point = input_tuple("Enter start point x, y: ")
-    direction = input_tuple("Enter robot direction x, y: ")
+    start_point = input_tuple("Enter start point x, y. \nRecommended start points are (1, 6), (1, 5), (1, 3), (1, 2): ")
+    direction = input_tuple("Enter robot direction x, y. \nRecommend direction is (0, -1): ")
     print()
 
-    end_point = scanner.scan()
-
-    path = a_star.search(start_point, end_point, direction)
-
-    print(str(path) + "\n")
-
-    print("\033[32mReady!\033[0m\n")
-    robot.forward()
-
-    while not path.finished:
-        navigate(path)
+    loop(start_point, direction)
 
 
 def input_tuple(prompt):

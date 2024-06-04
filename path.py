@@ -9,6 +9,8 @@ class Path():
     distance_to_target = 0
     track_points = False
     finished = False
+
+    direction_end = (0, 0)
     
 
     def __init__(self, start, target, nodes, map: Map):
@@ -64,6 +66,7 @@ class Path():
                     self.path.append(direction)
 
         self.distance_to_target = len(nodes) - last_intersection - 1
+        self.direction_end = (nodes[-1][0] - nodes[-2][0], nodes[-1][1] - nodes[-2][1])
 
         
 

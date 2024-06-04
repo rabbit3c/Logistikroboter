@@ -5,7 +5,6 @@ import time
 
 def scan():
     print("\033[33mScanning for barcode...\033[0m")
-    camera.init()
     print("\033[33mTaking pictures...\033[0m\n")
     result = ""
 
@@ -18,15 +17,13 @@ def scan():
             continue
 
         if len(result) == 6:
-            camera.stop()
             break
-        
-        time.sleep(1)
 
     point = barcode.decode(result)
     return point
 
 
 if __name__ == "__main__":
+    camera.init()
     scan()
     

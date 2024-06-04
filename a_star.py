@@ -1,5 +1,4 @@
 from map.map import Map
-from map.cell import Cell
 from path import Path
 
 
@@ -22,7 +21,7 @@ def search(start, target, direction, direction_end=False) -> Path: # A* Search A
     map.cell((start_node[0] - direction[0], start_node[1] - direction[1])).set_blocked()
     
     if direction_end:
-        map.cell((target_node[0] + direction_end[0], target_node[1] - direction_end[1])).set_blocked()
+        map.cell((target_node[0] + direction_end[0], target_node[1] + direction_end[1])).set_blocked()
 
     map.cell(start_node).g = 0 # distance of start_cell to start is 0
 

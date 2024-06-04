@@ -5,6 +5,7 @@ class Map:
     map = []
 
     def __init__(self):
+        self.map = []
         grid = self.load_json()
 
         for grid_line in grid:
