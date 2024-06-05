@@ -3,10 +3,12 @@ import robot
 import sensors.camera as camera
 from loop import loop
 from threading import Thread
+from communication import send_state
 
 
 def main():
     print("\033[32mStarting...\033[0m\n")
+    send_state("Starting...")
 
     init()
 

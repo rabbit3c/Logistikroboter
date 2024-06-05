@@ -5,6 +5,7 @@ import time
 from serial_communication import set_speed
 from navigate import navigate
 from shared import stop_event
+from communication import send_state
 
 
 def loop(start_point, direction):
@@ -24,6 +25,7 @@ def loop(start_point, direction):
 
 def navigate_path(path):
     print(str(path) + "\n")
+    send_state(f"Navigating on path from {path.start} to {path.target}")
 
     print("\033[32mReady!\033[0m\n")
     set_speed(90)

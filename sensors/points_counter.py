@@ -1,5 +1,6 @@
 from gpiozero import InputDevice
 from path import Path
+from communication import send_state
 
 
 count_sensor = InputDevice(17)
@@ -27,6 +28,7 @@ def check_sensor(path: Path, backwards):
     if points == path.distance_to_target:
         path.finished = True
         print("\n\033[32mArrived at destination!\033[32m")
+        send_state("Arrived at destination!")
         points = 0
         return True
 

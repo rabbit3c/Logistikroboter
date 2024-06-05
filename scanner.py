@@ -1,10 +1,13 @@
 import barcode
 import sensors.camera as camera
 from shared import stop_event
+from communication import send_state
 
 
 def scan():
     print("\033[33mScanning for barcode...\033[0m")
+    send_state("Scanning for barcode...")
+
     print("\033[33mTaking pictures...\033[0m\n")
     result = ""
 
