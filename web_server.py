@@ -1,8 +1,13 @@
 from flask import Flask, request
+from threading import Thread
 from main import main
+from shared import stop_event
 
 
 app = Flask(__name__)
+
+
+main_thread = None
 
 
 @app.route("/")
@@ -12,12 +17,24 @@ def home():
      
 @app.route('/control', methods = ['POST'])
 def control():
+    global main_thread
+
     action = request.form['action']
 
-    if action == "start":
-        main()
+    match action:
+        case "start":
+            stop_event.clear()
 
-    return 'Aktion erhalten: ' + action
+            main_thread = Thread(target = main) # run main in seperate thread to be able to stop it
+            main_thread.start()
+        
+        case "stop":
+            stop_event.set() # signal the main function to stop
+
+            if main_thread is not None:
+                main_thread.join() # wait for the thread to finish
+
+    return 'Aktion ausgeführt: ' + action
 
 
 if __name__ == "__main__":

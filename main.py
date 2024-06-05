@@ -1,6 +1,6 @@
 from navigate import *
 import robot
-import camera
+import sensors.camera as camera
 from loop import loop
 from threading import Thread
 

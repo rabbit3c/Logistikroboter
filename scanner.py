@@ -1,6 +1,6 @@
 import barcode
 import sensors.camera as camera
-import time
+from shared import stop_event
 
 
 def scan():
@@ -9,7 +9,7 @@ def scan():
     result = ""
 
     # take pictures and try to read a barcode until barcode is found
-    while True:
+    while not stop_event.is_set():
         camera.take_picture()
         result = barcode.read()
 
