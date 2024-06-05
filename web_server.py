@@ -24,17 +24,21 @@ def control():
     match command:
         case "start":
             stop_event.clear()
-            
-            main_thread = Thread(target = main) # run main in seperate thread to be able to stop it
-            main_thread.start()
 
-            return "started"
+            if main_thread is None:
+                main_thread = Thread(target = main) # run main in seperate thread to be able to stop it
+                main_thread.start()
+
+                return "started"
+            
+            return 'already started'
         
         case "stop":
             stop_event.set() # signal the main function to stop
 
             if main_thread is not None:
                 main_thread.join() # wait for the thread to finish
+                main_thread = None
 
             return "stopped"
         
