@@ -1,6 +1,6 @@
 from serial_communication import *
-from line_sensor import *
-import points_counter
+from sensors.line_sensor import *
+import sensors.points_counter as points_counter
 
 
 def init():

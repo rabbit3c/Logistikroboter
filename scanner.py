@@ -1,5 +1,5 @@
 import barcode
-import camera
+import sensors.camera as camera
 import time
 
 

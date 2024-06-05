@@ -1,8 +1,8 @@
-from line_sensor import *
+from sensors.line_sensor import *
 from serial_communication import *
 from path import Path
 import robot
-import points_counter
+import sensors.points_counter as points_counter
 
 def navigate(path):
     left = line_left()
