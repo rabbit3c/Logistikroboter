@@ -1,4 +1,5 @@
 from map.map import Map
+from communication import send_position
 
 class Path():
     left = 0
@@ -6,6 +7,8 @@ class Path():
     right = 2
 
     path = []
+    intersections_positions = [] # list of the positions of the intersections used to update position on website
+
     distance_to_target = 0
     track_points = False
     finished = False
@@ -64,6 +67,7 @@ class Path():
                         continue
 
                     self.path.append(direction)
+                    self.intersections_positions.append(node)
 
         self.distance_to_target = len(nodes) - last_intersection - 1
         self.direction_end = (nodes[-1][0] - nodes[-2][0], nodes[-1][1] - nodes[-2][1])
@@ -74,6 +78,7 @@ class Path():
     def next(self):
         if len(self.path) == 0: 
             return -1
+        send_position(self.intersections_positions.pop(0))
         return self.path.pop(0)
     
     

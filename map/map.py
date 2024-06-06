@@ -21,7 +21,7 @@ class Map:
 
 
     def load_json(self): # load map from json
-        file = open("/home/matthieu/Logistikroboter/map/map.json")
+        file = open("map/map.json")
         return json.load(file)
     
 

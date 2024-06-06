@@ -4,7 +4,7 @@ import sensors.camera as camera
 import data.data as data
 from loop import loop
 from threading import Thread
-from communication import send_state
+from communication import send_state, send_position
 
 
 def main():
@@ -32,6 +32,7 @@ def run():
 
     print()
 
+    send_position(data.data.start_position)
     loop(data.data.start_position, data.data.start_direction)
 
 

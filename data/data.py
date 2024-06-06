@@ -21,6 +21,8 @@ def array_to_tuple(array):
 
 
 class Data():
+    position = None
+
     def __init__(self, data) -> None:
         self.start_position = array_to_tuple(data["start_position"])
         self.start_direction = array_to_tuple(data["start_direction"])

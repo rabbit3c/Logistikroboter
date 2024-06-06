@@ -4,6 +4,7 @@ from main import run
 from shared import stop_event
 from communication import send_state
 import data.data as data
+import robot
 
 
 app = Flask(__name__)
@@ -41,6 +42,8 @@ def control():
             if main_thread is not None:
                 main_thread.join() # wait for the thread to finish
                 main_thread = None
+
+            robot.stop() # ensure that the robot is stopped
 
             return "stopped"
         
