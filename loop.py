@@ -25,7 +25,7 @@ def loop(start_point, direction):
 
 def navigate_path(path):
     print(str(path) + "\n")
-    send_state(f"Navigating on path from {path.start} to {path.target}")
+    send_state(f"Navigiert von {path.start} zu {path.target}")
 
     print("\033[32mReady!\033[0m\n")
     set_speed(90)

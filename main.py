@@ -26,7 +26,7 @@ def main():
 
 def run():
     print("\033[32mStarting...\033[0m\n")
-    send_state("Starting...")
+    send_state("Startet...")
 
     init()
 

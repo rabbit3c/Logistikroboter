@@ -6,7 +6,7 @@ from communication import send_state
 
 def scan():
     print("\033[33mScanning for barcode...\033[0m")
-    send_state("Scanning for barcode...")
+    send_state("Scannt Barcode...")
 
     print("\033[33mTaking pictures...\033[0m\n")
     result = ""
