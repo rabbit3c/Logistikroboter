@@ -1,7 +1,8 @@
 from flask import Flask, request
 from threading import Thread
-from main import main
+from main import run
 from shared import stop_event
+from communication import send_state
 
 
 app = Flask(__name__)
@@ -26,7 +27,7 @@ def control():
             stop_event.clear()
 
             if main_thread is None:
-                main_thread = Thread(target = main) # run main in seperate thread to be able to stop it
+                main_thread = Thread(target = run) # run main in seperate thread to be able to stop it
                 main_thread.start()
 
                 return "started"
@@ -46,5 +47,6 @@ def control():
 
 
 if __name__ == "__main__":
+    send_state("stopped")
     app.run(host='0.0.0.0', port=5000)
 # running on http://raspberrypi.local:5000 or in my case http://192.168.1.32:5000
