@@ -2,6 +2,7 @@ import json
 
 
 data = None
+items = []
 
 
 def get():
@@ -17,7 +18,7 @@ def save():
 
 
 def array_to_tuple(array):
-    return (array[0], array[1])
+    return (int(array[0]), int(array[1]))
 
 
 class Data():
@@ -26,11 +27,15 @@ class Data():
     def __init__(self, data) -> None:
         self.start_position = array_to_tuple(data["start_position"])
         self.start_direction = array_to_tuple(data["start_direction"])
+        self.delivery_position = array_to_tuple(data["delivery_position"])
+        self.delivery_direction = array_to_tuple(data["delivery_direction"])
         pass
 
     def data(self):
         return {
             "start_position": self.start_position,
-            "start_direction": self.start_direction
+            "start_direction": self.start_direction,
+            "delivery_position": self.delivery_position,
+            "delivery_direction": self.delivery_direction
         }
 

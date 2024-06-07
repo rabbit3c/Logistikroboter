@@ -16,7 +16,7 @@ def send_state_async(status):
     
 
 def send_position_async(position):
-    json = {"x_coordinate": position[0], "y_coordinate": position[1]}
+    json = {"position": position}
     try :
         response = requests.post(f"{server_url}/update_position/{robot_id}", json=json)
         return response.json()

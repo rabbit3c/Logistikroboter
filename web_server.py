@@ -5,6 +5,7 @@ from shared import stop_event, emergency_stop_event
 from communication import send_state
 import data.data as data
 import robot
+import json
 
 
 app = Flask(__name__)
@@ -23,14 +24,18 @@ def control():
     global main_thread
 
     command = request.form['command']
-
     match command:
         case "start":
             stop_event.clear()
             emergency_stop_event.clear()
+            
+            mode = request.form['mode']
+
+            if mode == "deliver":
+                data.items = json.loads(request.form['items'])
 
             if main_thread is None:
-                main_thread = Thread(target = run) # run main in seperate thread to be able to stop it
+                main_thread = Thread(target = run, args=[mode]) # run main in seperate thread to be able to stop it
                 main_thread.start()
 
                 return "started"
@@ -65,8 +70,10 @@ def control():
 
 @app.route('/set_values', methods = ['POST'])
 def set_value():
-    start_position = (int(request.form['x_coordinate']), int(request.form['y_coordinate']))
-    start_direction = (int(request.form['x_direction']), int(request.form['y_direction']))
+    start_position = data.array_to_tuple(json.loads(request.form['start_position']))
+    start_direction = data.array_to_tuple(json.loads(request.form['start_direction']))
+    delivery_position = data.array_to_tuple(json.loads(request.form['delivery_position']))
+    delivery_direction = data.array_to_tuple(json.loads(request.form['delivery_direction']))
 
     data.get()
 
@@ -75,6 +82,12 @@ def set_value():
 
     if start_direction is not None:
         data.data.start_direction = start_direction
+
+    if delivery_position is not None:
+        data.data.delivery_position = delivery_position
+
+    if delivery_direction is not None:
+        data.data.delivery_direction = delivery_direction
 
     data.save()
 
@@ -85,17 +98,11 @@ def set_value():
 def get_value():
     data.get()
 
-    x_coordinate = data.data.start_position[0]
-    y_coordinate = data.data.start_position[1]
-
-    x_direction = data.data.start_direction[0]
-    y_direction = data.data.start_direction[1]
-
     return jsonify({
-        "x_coordinate": x_coordinate,
-        "y_coordinate": y_coordinate,
-        "x_direction": x_direction,
-        "y_direction": y_direction
+        "start_position": data.data.start_position,
+        "start_direction": data.data.start_direction,
+        "delivery_position": data.data.delivery_position,
+        "delivery_direction": data.data.delivery_direction,
     })
 
 

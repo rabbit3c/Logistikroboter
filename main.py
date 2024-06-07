@@ -2,29 +2,32 @@ from navigate import *
 import robot
 import sensors.camera as camera
 import data.data as data
-from loop import loop
+from modes import store, deliver
 from threading import Thread
 from communication import send_state, send_position
 
 
 def main():
     print("\033[32mChoose option:\033[0m")
-    print(" [1]: Run robot")
-    print(" [2]: Set start values")
+    print(" [1]: Store items with robot")
+    print(" [2]: Deliver items with robot")
+    print(" [3]: Set start values")
 
     string = input()
     print()
 
     match string:
         case "1":
-            run()
+            run("store")
         case "2":
+            run("deliver")
+        case "3":
             set_start_values()
         case _:
             main()
 
 
-def run():
+def run(mode):
     print("\033[32mStarting...\033[0m\n")
     send_state("Startet...")
 
@@ -33,7 +36,11 @@ def run():
     print()
 
     send_position(data.data.start_position)
-    loop(data.data.start_position, data.data.start_direction)
+
+    if mode == "store":
+        store(data.data)
+    else:
+        deliver(data.data)
 
 
 def set_start_values():

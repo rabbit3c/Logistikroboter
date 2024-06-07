@@ -6,5 +6,13 @@
     "start_direction": [
         0,
         -1
+    ],
+    "delivery_position": [
+        11,
+        6
+    ],
+    "delivery_direction": [
+        0,
+        1
     ]
 }
