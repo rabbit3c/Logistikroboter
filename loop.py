@@ -34,7 +34,7 @@ def navigate_path(path):
     send_path(path)
 
     print("\033[32mReady!\033[0m\n")
-    set_speed(90)
+    set_speed(110)
     robot.forward()
 
     while not path.finished and not stop_event.is_set():

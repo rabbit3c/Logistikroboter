@@ -4,6 +4,10 @@ from path import Path
 import robot
 import sensors.points_counter as points_counter
 
+
+states = ["intersection", "line_left", "line_right", "normal"]
+
+
 def navigate(path):
     left = line_left()
     right = line_right()
@@ -55,7 +59,6 @@ def navigate_intersection(path: Path):
 
 
 def check_if_changed(i): # i -> index in states
-    states = ["intersection", "line_left", "line_right", "normal"]
     global state
 
     if state == states[i]:

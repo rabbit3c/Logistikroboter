@@ -1,6 +1,7 @@
 from map.map import Map
 from communication import send_position
 
+
 class Path():
     left = 0
     forward = 1
@@ -31,6 +32,8 @@ class Path():
     
     
     def calculate(self, map: Map, nodes): # translate Path from A* Search Algorithm in directions for the robot to take
+        self.path.clear()
+
         directions = [
             [self.forward, self.forward, self.left, self.right],
             [self.forward, self.forward, self.right, self.left],
