@@ -12,26 +12,31 @@ def navigate(path):
     left = line_left()
     right = line_right()
     finished = False
-
-    if left and right:
+    
+    # if both sensor detect a line, navgigate this interserction
+    if left and right: 
         if check_if_changed(0):
             print("Intersection detected")
             navigate_intersection(path)
-    elif left:
-        finished = points_counter.check_sensor(path, True)
+
+    # if the left sensor detects the line and the point counting sensor isn't on a point, turn left
+    elif left and not points_counter.state:
         if check_if_changed(1):
-            # print("Line detected on the left")
             robot.left()
-    elif right:
-        finished = points_counter.check_sensor(path, True)
+        finished = points_counter.check_sensor(path)
+
+    # if the right sensor detects the line and the point counting sensor isn't on a point, turn right
+    elif right and not points_counter.state:
         if check_if_changed(2):
-            # print("Line detected on the right")
             robot.right()
+        finished = points_counter.check_sensor(path, backwards=True) # if the robot turns right, the right side of the robot, where the sensor is located, goes backwards
+
+    # if the no sensor detects a line go straight
     else:
-        finished = points_counter.check_sensor(path, False)
         if check_if_changed(3):
             send_command("forward")
             robot.forward()
+        finished = points_counter.check_sensor(path)
 
     if finished:
         send_command("stop")
