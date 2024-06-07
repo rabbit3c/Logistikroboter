@@ -1,6 +1,7 @@
 from serial_communication import *
 from sensors.line_sensor import *
 import sensors.points_counter as points_counter
+from shared import emergency_stop_event
 
 
 def init():
@@ -34,12 +35,12 @@ def turn_right(path):
     send_command("turn_right")
     sleep(0.3)
 
-    while not line_right(): # wait until reaching the line
+    while not line_right() and not emergency_stop_event.is_set(): # wait until reaching the line
         pass
 
     path.check_path_done() # check if points need to be counted
 
-    while line_right(): # wait until the line was crossed by the right sensor
+    while line_right() and not emergency_stop_event.is_set(): # wait until the line was crossed by the right sensor
         if points_counter.check_sensor(path): #start to count points if needed, exit if arrived at destination
             return
         pass
@@ -54,12 +55,12 @@ def turn_left(path):
 
     path.check_path_done() # check if points need to be counted
 
-    while not line_left(): # wait until reaching the line
+    while not line_left() and not emergency_stop_event.is_set(): # wait until reaching the line
         if points_counter.check_sensor(path): #start to count points if needed, exit if arrived at destination
             return
         pass
 
-    while line_left(): # wait until the line was crossed by the right sensor
+    while line_left() and not emergency_stop_event.is_set(): # wait until the line was crossed by the right sensor
         if points_counter.check_sensor(path): #start to count points if needed, exit if arrived at destination
             return
         pass

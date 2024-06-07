@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from threading import Thread
 from main import run
-from shared import stop_event
+from shared import stop_event, emergency_stop_event
 from communication import send_state
 import data.data as data
 import robot
@@ -27,6 +27,7 @@ def control():
     match command:
         case "start":
             stop_event.clear()
+            emergency_stop_event.clear()
 
             if main_thread is None:
                 main_thread = Thread(target = run) # run main in seperate thread to be able to stop it
@@ -46,6 +47,18 @@ def control():
             robot.stop() # ensure that the robot is stopped
 
             return "stopped"
+        
+        case "emergency_stop":
+            emergency_stop_event.set() # signal the main function to stop
+            stop_event.set()
+
+            if main_thread is not None:
+                main_thread.join() # wait for the thread to finish
+                main_thread = None
+
+            robot.stop() # ensure that the robot is stopped
+
+            return "emergency_stopped"
         
     return 'Aktion konnte nicht ausgeführt werden: ' + command
 

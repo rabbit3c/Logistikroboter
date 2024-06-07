@@ -20,7 +20,7 @@ def check_sensor(path: Path, backwards=False):
         if not state:
             state = True
             points += 1
-            
+
             print(f"New Point detected. Point {points}/{path.distance_to_target}")
 
     else:
@@ -29,7 +29,7 @@ def check_sensor(path: Path, backwards=False):
     if points == path.distance_to_target:
         path.finished = True
 
-        print("\n\033[32mArrived at destination!\033[32m")
+        print("\n\033[32mArrived at destination!\033[0m")
         send_state("Ziel erreicht!")
 
         points = 0

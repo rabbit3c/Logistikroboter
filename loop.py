@@ -4,7 +4,7 @@ import robot
 import time
 from serial_communication import set_speed
 from navigate import navigate
-from shared import stop_event
+from shared import stop_event, emergency_stop_event
 from communication import send_state, send_position, send_path
 
 
@@ -37,6 +37,6 @@ def navigate_path(path):
     set_speed(110)
     robot.forward()
 
-    while not path.finished and not stop_event.is_set():
+    while not path.finished and not emergency_stop_event.is_set():
         navigate(path)
 
