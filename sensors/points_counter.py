@@ -7,6 +7,8 @@ count_sensor = InputDevice(17)
 points = 0
 state = False
 
+
+# Check the point sensor to see if new point was detected
 def check_sensor(path: Path, backwards=False):
     if not path.track_points:
         return

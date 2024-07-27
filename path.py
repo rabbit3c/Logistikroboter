@@ -17,12 +17,14 @@ class Path():
     direction_end = (0, 0)
     
 
+    # initialize Path
     def __init__(self, start, target, nodes, map: Map):
         self.start = start
         self.target = target
         self.calculate(map, nodes)
 
 
+    # Custom string function to display path
     def __str__(self):
         path_string = str(self.path)
 
@@ -30,8 +32,9 @@ class Path():
 
         return f"Path from {self.start} to {self.target}: {path_string} and then counting {self.distance_to_target} points"
     
-    
-    def calculate(self, map: Map, nodes): # translate Path from A* Search Algorithm in directions for the robot to take
+
+    # Translate Path from A* Search Algorithm in directions for the robot to take
+    def calculate(self, map: Map, nodes):
         self.path.clear()
 
         directions = [
@@ -75,9 +78,8 @@ class Path():
         self.distance_to_target = len(nodes) - last_intersection - 1
         self.direction_end = (nodes[-1][0] - nodes[-2][0], nodes[-1][1] - nodes[-2][1])
 
-        
 
-
+    # Get direction for next intersection and delete it from the path
     def next(self):
         if len(self.path) == 0: 
             return -1
@@ -85,6 +87,7 @@ class Path():
         return self.path.pop(0)
     
     
+    # Check if there are no more intersections left, if it's the case start to track points
     def check_path_done(self):
         if len(self.path) == 0: # if there are no more elements in the list, start to track points
             print("\nTracking points...")

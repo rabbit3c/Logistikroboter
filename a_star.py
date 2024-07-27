@@ -1,10 +1,11 @@
 from map.map import Map
 from path import Path
 
-
-def search(start, target, direction, direction_end=False) -> Path: # A* Search Algorithm
+# Slightly simplified A* Search Algorithm to calculate
+def search(start, target, direction, direction_end=False) -> Path: 
     print("\033[33mStarting Search Algorithm...\033[0m")
 
+    # create instance of the map and set start and target
     map = Map()
 
     map.set_start(start)
@@ -15,14 +16,18 @@ def search(start, target, direction, direction_end=False) -> Path: # A* Search A
     print(map)
     print()
 
+    # calcuate nearest node to start and target
     start_node = map.nearest_lane(start)
     target_node = map.nearest_lane(target)
 
+    # block cell behind robot to force robot to drive in right direction
     map.cell((start_node[0] - direction[0], start_node[1] - direction[1])).set_blocked()
     
+    # if wanted, block cell in front of target to force robot to drive from right direction
     if direction_end:
         map.cell((target_node[0] + direction_end[0], target_node[1] + direction_end[1])).set_blocked()
 
+    # start of the actual A* Search Algorithm
     map.cell(start_node).g = 0 # distance of start_cell to start is 0
 
     open_list = [start_node] # nodes to explore
@@ -60,8 +65,9 @@ def search(start, target, direction, direction_end=False) -> Path: # A* Search A
 
     raise Exception("No Path was found")
 
-    
-def trace_path(map: Map, start_node, target_node) -> Path: # draw path on map and calculate instructions for robot
+
+# draw path on map and calculate instructions for robot
+def trace_path(map: Map, start_node, target_node) -> Path:
     print("\033[32mPath calculated!\033[0m")
     
     nodes = map.draw_path(start_node, target_node)
@@ -70,13 +76,14 @@ def trace_path(map: Map, start_node, target_node) -> Path: # draw path on map an
     return Path(start_node, target_node, nodes, map)
 
 
-            
-def calculate_h(point, target): # estimate distance to target
+# Estimate distance to target            
+def calculate_h(point, target):
     distance = abs(point[0] - target[0]) + abs(point[1] - target[1])
     return distance
 
 
-def smallest_f(list: list, map: Map) -> tuple[int, int]: # find cell with smallest f value
+# Find cell with smallest f value
+def smallest_f(list: list, map: Map) -> tuple[int, int]:
     best_f = float('inf') 
 
     for node in list:
@@ -84,7 +91,7 @@ def smallest_f(list: list, map: Map) -> tuple[int, int]: # find cell with smalle
         if f > best_f:
             continue
         if f == best_f:
-            if node[0] == 6 or node[1] == 4: # try to avoid the middle
+            if node[0] > 1 and node [0] > or node[1] == 4: # try to avoid the middle of the warehouse
                 continue
         best_node = node
         best_f = f

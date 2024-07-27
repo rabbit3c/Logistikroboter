@@ -8,12 +8,13 @@ import sensors.points_counter as points_counter
 states = ["intersection", "line_left", "line_right", "normal"]
 
 
+# Function which handles the navigation of the robot by readin the line sensors and acting accordingly
 def navigate(path):
     left = line_left()
     right = line_right()
     finished = False
     
-    # if both sensor detect a line, navgigate this interserction
+    # if both sensor detect a line, navigate this interserction
     if left and right: 
         if check_if_changed(0):
             print("Intersection detected")
@@ -43,6 +44,7 @@ def navigate(path):
         return
 
 
+# Navigation an intersection according to the calculated path
 def navigate_intersection(path: Path):
     robot.stop()
 
@@ -63,6 +65,7 @@ def navigate_intersection(path: Path):
             robot.stop()
 
 
+# Check if driving state (forward, left, right, intersection) of robot changed
 def check_if_changed(i): # i -> index in states
     global state
 

@@ -14,17 +14,23 @@ app = Flask(__name__)
 main_thread = None
 
 
+# Web Server robot
+
+
+# Main page, placeholder
 @app.route("/")
 def home():
     return "<p>Logistikroboter Web Server<p>"
      
 
+# POST Method to control the robot from the main server
 @app.route('/control', methods = ['POST'])
 def control():
     global main_thread
 
     command = request.form['command']
     match command:
+        # Start robot
         case "start":
             stop_event.clear()
             emergency_stop_event.clear()
@@ -42,6 +48,7 @@ def control():
             
             return 'already started'
         
+        # Stop robot gracefully
         case "stop":
             stop_event.set() # signal the main function to stop
 
@@ -53,6 +60,7 @@ def control():
 
             return "stopped"
         
+        # Make the robot stop immediately
         case "emergency_stop":
             emergency_stop_event.set() # signal the main function to stop
             stop_event.set()
@@ -68,6 +76,7 @@ def control():
     return 'Aktion konnte nicht ausgeführt werden: ' + command
 
 
+# POST method to change start and delivery values of the robot from the main server
 @app.route('/set_values', methods = ['POST'])
 def set_value():
     start_position = data.array_to_tuple(json.loads(request.form['start_position']))
@@ -94,6 +103,7 @@ def set_value():
     return 'Saved values'
 
 
+# GET method to retrieve start values and delivery values of the robot
 @app.route('/get_values', methods = ['GET'])
 def get_value():
     data.get()

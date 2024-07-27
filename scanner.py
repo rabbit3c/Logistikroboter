@@ -4,6 +4,7 @@ from shared import stop_event
 from communication import send_state
 
 
+# Function that repeatedly takes a picture and scans it for barcodes
 def scan():
     print("\033[33mScanning for barcode...\033[0m")
     send_state("Scannt Barcode...")
@@ -11,7 +12,7 @@ def scan():
     print("\033[33mTaking pictures...\033[0m\n")
     result = ""
 
-    # take pictures and try to read a barcode until barcode is found
+    # Take pictures and try to read a barcode until barcode is found
     while not stop_event.is_set():
         camera.take_picture()
         result = barcode.read()

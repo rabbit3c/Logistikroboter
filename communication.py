@@ -5,7 +5,7 @@ import threading
 robot_id = "Logistikroboter" # TODO: Change id to a unique ID for this robot
 server_url = 'http://192.168.1.100:5001' # TODO: Change to url of main server
 
-
+# Send current state to main server
 def send_state_async(status):
     json = {"status": status}
     try :
@@ -15,6 +15,7 @@ def send_state_async(status):
         return "Unable to update status" 
     
 
+# Send position to main server
 def send_position_async(position):
     json = {"position": position}
     try :
@@ -24,6 +25,7 @@ def send_position_async(position):
         return "Unable to update position" 
     
 
+# Send path to main server
 def send_path_async(path):
     json = {"start": path.start, "target": path.target}
     try :
@@ -33,19 +35,23 @@ def send_path_async(path):
         return "Unable to update path" 
     
 
+# Run function in async as to not interrupt main thread
 def run_async(func, *args):
     thread = threading.Thread(target=func, args=args)
     thread.start()
 
 
+# Send current state to main server
 def send_path(path):
     run_async(send_path_async, path)
 
 
+# Send position to main server
 def send_position(position):
     run_async(send_position_async, position)
 
 
+# Send path to main server
 def send_state(status):
     run_async(send_state_async, status)
 

@@ -1,9 +1,12 @@
 import serial
 from time import sleep
 
+
 arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 arduino.reset_input_buffer()
 
+
+# Test Serial Communication with the Arduino
 def communication_test():
     print("Testing communication...")
 
@@ -22,12 +25,13 @@ def communication_test():
     communication_test()
 
 
+# Send command to Arduino via Serial Communication
 def send_command(command):
-    # print(f"Sending command: \"{command}\"")
     arduino.write(f"{command}\n".encode())
     return confirmation()
 
 
+# Set speed of the motors via Serial Communication
 def set_speed(speed):
     print("Setting speed...\n")
     arduino.reset_input_buffer()
@@ -39,6 +43,7 @@ def set_speed(speed):
         set_speed(speed)
 
 
+# Check for confirmation from Arduino
 def confirmation():
     answer = arduino.readline().decode('utf-8').rstrip()
     return answer == "ok"

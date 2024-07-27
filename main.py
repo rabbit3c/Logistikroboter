@@ -7,6 +7,7 @@ from threading import Thread
 from communication import send_state, send_position
 
 
+# Main function with the ability to chose the operating mode of the robot
 def main():
     print("\033[32mChoose option:\033[0m")
     print(" [1]: Store items with robot")
@@ -27,6 +28,7 @@ def main():
             main()
 
 
+# Run robot in specified mode
 def run(mode):
     print("\033[32mStarting...\033[0m\n")
     send_state("Startet...")
@@ -43,6 +45,7 @@ def run(mode):
         deliver(data.data)
 
 
+# Set start position and direction of robot
 def set_start_values():
     data.get()
     data.data.start_position = input_tuple("Enter start positions x, y. \nRecommended start positions are (1, 6), (1, 5), (1, 3), (1, 2): ")
@@ -50,8 +53,8 @@ def set_start_values():
     data.save()
 
 
+# Initialize camera and robot and load data in seperate threads to decrease startup time
 def init():
-    #initialize camera and robot and load data in seperate threads to decrease startup time
     camera_thread = Thread(target=camera.init)
     robot_thread = Thread(target=robot.init)
     data_thread = Thread(target=data.get)
@@ -65,6 +68,7 @@ def init():
     data_thread.join()
 
 
+# convert input string into tuple
 def input_tuple(prompt):
     user_input = input(prompt)
     input_parts = user_input.split(",")

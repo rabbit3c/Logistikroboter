@@ -4,6 +4,9 @@ import sensors.points_counter as points_counter
 from shared import emergency_stop_event
 
 
+# Various commands to control and drive the robot
+
+
 def init():
     communication_test()
 

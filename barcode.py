@@ -2,23 +2,21 @@ import cv2
 from pyzbar import pyzbar
 
 
+# Reading a barcode
 def read(filename="picture.jpg"):
-    # print("Scanning image for barcodes...")
-
     image_path = f"pictures/{filename}"
-    # print(f"Reading image from {image_path}...")
 
+    # load image
     image = cv2.imread(image_path)
     if image is None:
-        print(f"Error: Unable to load image at {image_path}")
-        return
+        raise Exception(f"Error: Unable to load image at {image_path}")
 
+    # read barcodes from image
     barcodes = pyzbar.decode(image)
 
-    # print("Barcodes:")
+    # decode barcodes and return correct barcode
     for barcode in barcodes:
         data = barcode.data.decode("utf-8")
-        #print(data)
 
         # if the data of the barcode has the right length return it to start navigation
         if data is None:
@@ -28,7 +26,7 @@ def read(filename="picture.jpg"):
         
     return False
         
-
+# Decode barcode in the needed values
 def decode(string):
     y = int(string[:2]) # take first to characters
     x = int(string[2:4]) # take two middle characters

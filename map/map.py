@@ -4,6 +4,8 @@ from map.cell import Cell
 class Map:
     map = []
 
+
+    # initialize map
     def __init__(self):
         self.map = []
         grid = self.load_json()
@@ -20,11 +22,13 @@ class Map:
         self.calculate_intersections()
 
 
-    def load_json(self): # load map from json
+    # Load map from json
+    def load_json(self): 
         file = open("map/map.json")
         return json.load(file)
     
 
+    # Calculate which cells are an intersection
     def calculate_intersections(self):
         for y, map_line in enumerate(self.map):
             for x, cell in enumerate(map_line):
@@ -35,6 +39,7 @@ class Map:
                     cell.set_intersection()
     
 
+    # Custom string function to display the map
     def __str__(self):
         string = ""
 
@@ -47,19 +52,23 @@ class Map:
         return string
     
 
+    # Return cell at given coordinates
     def cell(self, point) -> Cell:
         return self.map[point[1]][point[0]]
     
 
+    # Set start cell
     def set_start(self, start):
         self.cell(start).set_start()
 
 
+    # Set target cell
     def set_target(self, target):
         self.cell(target).set_target()
 
 
-    def nearest_lane(self, point) -> tuple[int, int]: # find nearest path cell to a point
+    # Find nearest lane cell to a point
+    def nearest_lane(self, point) -> tuple[int, int]:
         if self.cell(point).lane:
             return point
         
@@ -73,10 +82,11 @@ class Map:
             if self.cell((x, i)).lane:
                 return (x, i)
             
-        raise Exception("Target is not adjacent to a path")
+        raise Exception("Target is not adjacent to a lane")
     
     
-    def successor_nodes(self, point) -> list[tuple[int, int]]: # find adjacent path cells and return them
+    # Find adjacent lane cells and return them
+    def successor_nodes(self, point) -> list[tuple[int, int]]:
         nodes = []
 
         x = point[0]
@@ -100,6 +110,7 @@ class Map:
         return nodes
     
 
+    # Count the number of neighbouring lanes
     def count_neighbours(self, point):
         counter = 0
 
@@ -124,6 +135,7 @@ class Map:
         return counter
     
 
+    # Draw the path on the map
     def draw_path(self, start_node, target_node) -> list[tuple[int, int]]:
         node = target_node
         path = []
