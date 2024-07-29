@@ -1,6 +1,7 @@
 from map.map import Map
 from path import Path
 
+
 # Slightly simplified A* Search Algorithm to calculate
 def search(start, target, direction, direction_end=False) -> Path: 
     print("\033[33mStarting Search Algorithm...\033[0m")
@@ -49,16 +50,19 @@ def search(start, target, direction, direction_end=False) -> Path:
                 path = trace_path(map, start_node, target_node)
                 return path
 
-            if successor in open_list:
+            g = calculate_g(q_cell, successor, q_cell.parent) # compute g, which is the distance to the start node
+            h = calculate_h(successor, target_node) # compute h, which is the estimated distance to the target node
+
+            if successor in open_list and g + h >= cell.f():
                 continue
 
-            if successor in closed_list:
+            if successor in closed_list and g + h >= cell.f():
                 continue
 
-            cell.g = q_cell.g + 1 # compute g, which is the distance to the start node
-            cell.h = calculate_h(successor, target_node)
-
+            cell.g = g
+            cell.h = h
             cell.parent = q
+
             open_list.append(successor)
         
         closed_list.append(q)
@@ -82,6 +86,12 @@ def calculate_h(point, target):
     return distance
 
 
+def calculate_g(cell, successor, parent):
+    if (abs(successor[0] - parent[0]) == 2 or abs(successor[1] - parent[1]) == 2):
+        return cell.g + 1
+    return cell.g + 2 # make g bigger if robot has to turn
+
+
 # Find cell with smallest f value
 def smallest_f(list: list, map: Map) -> tuple[int, int]:
     best_f = float('inf') 
@@ -90,9 +100,6 @@ def smallest_f(list: list, map: Map) -> tuple[int, int]:
         f = map.cell(node).f()
         if f > best_f:
             continue
-        if f == best_f:
-            if node[0] > 1 and node [0] > or node[1] == 4: # try to avoid the middle of the warehouse
-                continue
         best_node = node
         best_f = f
     
