@@ -30,4 +30,3 @@ def take_picture(filename="picture"):
 if __name__ == "__main__":
     init()
     take_picture()
-

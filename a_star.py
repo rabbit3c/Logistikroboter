@@ -47,7 +47,7 @@ def search(start, target, direction, direction_end=False) -> Path:
 
             if successor == target_node:
                 cell.parent = q
-                path = trace_path(map, start_node, target_node)
+                path = trace_path(map, start_node, target_node, target)
                 return path
 
             g = calculate_g(q_cell, successor, q_cell.parent) # compute g, which is the distance to the start node
@@ -71,13 +71,13 @@ def search(start, target, direction, direction_end=False) -> Path:
 
 
 # draw path on map and calculate instructions for robot
-def trace_path(map: Map, start_node, target_node) -> Path:
+def trace_path(map: Map, start_node, target_node, target) -> Path:
     print("\033[32mPath calculated!\033[0m")
     
     nodes = map.draw_path(start_node, target_node)
     print(map)
 
-    return Path(start_node, target_node, nodes, map)
+    return Path(start_node, target_node, nodes, map, target)
 
 
 # Estimate distance to target            

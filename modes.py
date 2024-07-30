@@ -17,6 +17,8 @@ def store(data: d.Data):
         # Driving to coordinates on barcode to store the item
         path = a_star.search(data.start_position, end_point, data.start_direction)
         navigate_path(path)
+        robot.unload(path.direction_target)
+        time.sleep(2)
 
         # Driving back to item pick-up
         path = a_star.search(end_point, data.start_position, path.direction_end, direction_end=data.start_direction)
@@ -40,10 +42,12 @@ def deliver(data: d.Data):
         # Driving to next item to pick up
         path = a_star.search(data.delivery_position, item_position, path.direction_end)
         navigate_path(path)
+        time.sleep(3)
 
         # Delivering next item at item delivery
         path = a_star.search(item_position, data.delivery_position, path.direction_end, direction_end=data.delivery_direction)
         navigate_path(path)
+        time.sleep(3)
 
     # Driving back to start position
     path = a_star.search(data.delivery_position, data.start_position, path.direction_end, direction_end=data.start_direction)
@@ -56,8 +60,8 @@ def deliver(data: d.Data):
 # Navigate along given path
 def navigate_path(path):
     print(str(path) + "\n")
-    send_state(f"Navigiert von {path.start} zu {path.target}")
-    send_position(path.start)
+    send_state(f"Navigiert von {path.start_node} zu {path.target_node}")
+    send_position(path.start_node)
     send_path(path)
 
     print("\033[32mReady!\033[0m\n")
@@ -67,6 +71,4 @@ def navigate_path(path):
     while not path.finished and not emergency_stop_event.is_set():
         navigate(path)
 
-    send_position(path.target)
-
-    time.sleep(3)
+    send_position(path.target_node)

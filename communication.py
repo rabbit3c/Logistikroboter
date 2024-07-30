@@ -27,7 +27,7 @@ def send_position_async(position):
 
 # Send path to main server
 def send_path_async(path):
-    json = {"start": path.start, "target": path.target}
+    json = {"start": path.start_node, "target": path.target_node}
     try :
         response = requests.post(f"{server_url}/update_path/{robot_id}", json=json)
         return response.json()

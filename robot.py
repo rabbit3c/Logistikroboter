@@ -31,6 +31,10 @@ def left():
     send_command("left")
 
 
+def unload(direction):
+    send_command(f"u{direction}")
+
+
 def turn_right(path):
     forward()
     sleep(0.1)
@@ -56,12 +60,10 @@ def turn_left(path):
     send_command("turn_left")
     sleep(0.3)
 
-    path.check_path_done() # check if points need to be counted
-
     while not line_left() and not emergency_stop_event.is_set(): # wait until reaching the line
-        if points_counter.check_sensor(path): #start to count points if needed, exit if arrived at destination
-            return
         pass
+
+    path.check_path_done() # check if points need to be counted
 
     while line_left() and not emergency_stop_event.is_set(): # wait until the line was crossed by the right sensor
         if points_counter.check_sensor(path): #start to count points if needed, exit if arrived at destination
